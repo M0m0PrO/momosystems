@@ -1,0 +1,242 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap');
+:root {
+    --spieler-farbe: #29a397;
+    --gegner-farbe: #cc0058;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+section {
+    font-family: 'Arial', 'Helvetica', 'sans-serif';
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(1rem, 10vh, 4rem);
+    padding-top:40px;
+}
+
+.spielanzeige,
+.overlay-text {
+    font-size: clamp(2rem, 10vh, 4rem);
+    font-weight: 900;
+    text-align: center;
+}
+
+.spielfeld {
+    width: 1000px;
+    aspect-ratio: 1 / 1;
+    max-width: 90%;
+    max-height: 35%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+
+}
+
+.feld {
+    background-color: transparent;
+    border: 0.2rem solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5%;
+    aspect-ratio: 1 / 1;
+}
+
+.feld:nth-child(-n+3) {
+    border-top: none;
+}
+
+.feld:nth-child(3n+3) {
+    border-right: none;
+}
+
+.feld:nth-child(n+7) {
+    border-bottom: none;
+}
+
+.feld:nth-child(3n+1) {
+    border-left: none;
+}
+
+.feld::before,
+.feld::after {
+    content: "";
+    box-sizing: border-box;
+}
+
+.feld.spieler::before,
+.spielanzeige.spieler~.spielfeld .feld:not([disabled]):hover::before {
+    border: 1rem solid var(--spieler-farbe);
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+}
+
+.feld.gegner::before,
+.feld.gegner::after {
+    background-color: var(--gegner-farbe);
+    width: 1rem;
+    height: 100%;
+}
+
+.feld.gegner::before {
+    transform: translateX(50%) rotate(45deg);
+}
+
+.feld.gegner::after {
+    transform: translateX(-50%) rotate(-45deg);
+}
+
+.spielanzeige.spieler,
+.overlay-text.spieler {
+    color: var(--spieler-farbe);
+}
+
+.spielanzeige.gegner,
+.overlay-text.gegner {
+    color: var(--gegner-farbe);
+}
+
+.feld:not([disabled]) {
+    cursor: pointer;
+}
+
+.spielanzeige.spieler~.spielfeld .feld:not([disabled]):hover::before {
+    opacity: 0.3;
+}
+
+.overlay {
+    background-color: rgba(0, 0, 0, 0.98);
+    position: fixed;
+    inset: 0;
+    color: #c9cc00;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(1rem, 2vh, 4rem);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.overlay-button {
+    font-size: 2rem;
+    font-weight: 600;
+    background-color: rgb(0, 255, 0);
+    border: none;
+    padding: 0.5em 1em;
+    border-radius: 2rem/50%;
+}
+
+.overlay-button:hover {
+    cursor: pointer;
+    background-color: rgba(0, 200, 0)
+}
+
+.overlay.sichtbar {
+    opacity: 1;
+    pointer-events: all;
+    transition: opacity 1.5s;
+}
+
+
+/* Header */
+
+header.bigheader {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 30px 100px;
+    display: flex;
+    align-items: center;
+    z-index: 10000;
+    background-color: #1b0a36;
+    font-family: 'Poppins', sans-serif;
+    /* border-radius: 20px; */
+}
+
+header.bigheader .logo {
+    color: #fff;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding-left: 10px;
+}
+
+header.bigheader ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 50%;
+}
+
+header.bigheader ul li {
+    list-style: none;
+    margin-left: 20px;
+}
+
+header.bigheader ul li a {
+    text-decoration: none;
+    padding: 6px 15px;
+    color: #fff;
+    border-radius: 20px;
+}
+
+header.bigheader ul li a:hover,
+header.bigheader ul li a.active {
+    background-color: #fff;
+    color: #2b1055;
+}
+
+header.bigheader ul li a.active:hover {
+    background-color: #1b0a36;
+    color: #fff;
+}
+
+header.bigheader ul li ul {
+    display: none;
+    position: absolute;
+    background-color: #338585;
+    border-radius: 12px;
+    padding: 7px;
+    margin-top: 6px;
+}
+
+header.bigheader ul li:hover ul {
+    display: block;
+}
+
+header.bigheader ul li ul li a {
+    color: white;
+    padding: 16px 20px;
+    font-size: 24px;
+    text-decoration: none;
+    float: left;
+    list-style: none;
+    font-family: Arial;
+}
+
+.mdl-mega-footer {
+    background: rgb(53, 52, 52);
+}
+
+.linksExplor {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+.linksExplor:hover {
+    text-decoration: underline;
+}
